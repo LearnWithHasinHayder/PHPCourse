@@ -1,0 +1,3 @@
+[submodule "crud"]
+	path = crud
+	url = git@github.com:LearnWithHasinHayder/Crud.git
