@@ -1,3 +1,6 @@
 [submodule "crud"]
 	path = crud
 	url = git@github.com:LearnWithHasinHayder/Crud.git
+[submodule "scrambler"]
+	path = scrambler
+	url = git@github.com:LearnWithHasinHayder/Scrambler.git
