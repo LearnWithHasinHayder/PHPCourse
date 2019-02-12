@@ -23,7 +23,7 @@ class FavColor{
     }
 
     function __clone(){
-        $this->color =clone $this->color;
+        $this->color = clone $this->color;
     }
 }
 
