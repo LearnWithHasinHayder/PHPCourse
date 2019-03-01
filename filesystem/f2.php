@@ -5,6 +5,3 @@ while(false !== ($entry = readdir($entries))){
 };
 
 
-$directory = new Directory(getcwd());
-echo $directory->getDirectories();
-echo $directory->getFiles();
