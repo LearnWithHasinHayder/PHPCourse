@@ -23,7 +23,7 @@ interface FileInterface{
     function display();
 } 
 
-class ImageFIle implements FileInterface{
+class ImageFile implements FileInterface{
     function display(){
         //take necessary steps to display image
     }

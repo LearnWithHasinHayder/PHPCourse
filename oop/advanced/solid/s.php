@@ -16,8 +16,6 @@ class BetterMailer{
         $this->mg = $mg;
         $this->mail = $mail;
         $this->attachment = $attachment;
-
-        
     }
 
     function sendMail($to, $from, $subject, $message, $attachment){
@@ -25,7 +23,8 @@ class BetterMailer{
         $mailBody = $this->mail->prepare($to, $from, $subject, $message);
         $this->mg->connect();
         $this->mg->send($mailBody);
-        
     }
 }
+
+
 
