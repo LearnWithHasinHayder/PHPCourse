@@ -1,2 +1,2 @@
 <?php
-phpinfo();
+echo mail("ggg","hello","Messge");
