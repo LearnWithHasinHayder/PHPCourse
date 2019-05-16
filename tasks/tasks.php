@@ -47,7 +47,7 @@ if ( ! $connection ) {
 			if ( $taskids ) {
 				$query = "UPDATE tasks SET complete=1 WHERE id in ($_taskids)";
 				mysqli_query( $connection, $query );
-
+			}
 			header( 'Location: index.php' );
 		} else if ( 'bulkdelete' == $action ) {
 			$taskids = $_POST['taskids'];
