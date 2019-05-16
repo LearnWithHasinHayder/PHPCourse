@@ -89,42 +89,44 @@ $resultCompleteTasks = mysqli_query( $connection, $completeTasksQuery );
 	} else {
 		?>
         <h4>Upcoming Tasks</h4>
-        <table>
-            <thead>
-            <tr>
-                <th></th>
-                <th>Id</th>
-                <th>Task</th>
-                <th>Date</th>
-                <th>Action</th>
-            </tr>
-            </thead>
-            <tbody>
-			<?php
-			while ( $data = mysqli_fetch_assoc( $result ) ) {
-				$timestamp = strtotime( $data['date'] );
-				$date      = date( "jS M, Y", $timestamp );
-				?>
+        <form action="tasks.php" method="POST">
+            <table>
+                <thead>
                 <tr>
-                    <td><input class="label-inline" type="checkbox" value="<?php echo $data['id']; ?>"></td>
-                    <td><?php echo $data['id'] ?></td>
-                    <td><?php echo $data['task']; ?></td>
-                    <td><?php echo $date; ?></td>
-                    <td><a class="delete" data-taskid="<?php echo $data['id'] ?>" href='#'>Delete</a> | <a
-                                class="complete" data-taskid="<?php echo $data['id'] ?>" href='#'>Complete</a></td>
+                    <th></th>
+                    <th>Id</th>
+                    <th>Task</th>
+                    <th>Date</th>
+                    <th>Action</th>
                 </tr>
+                </thead>
+                <tbody>
 				<?php
-			}
-			mysqli_close( $connection );
-			?>
-            </tbody>
-        </table>
-        <select id="action">
-            <option value="0">With Selected</option>
-            <option value="del">Delete</option>
-            <option value="complete">Mark As Complete</option>
-        </select>
-        <input class="button-primary" type="submit" value="Submit">
+				while ( $data = mysqli_fetch_assoc( $result ) ) {
+					$timestamp = strtotime( $data['date'] );
+					$date      = date( "jS M, Y", $timestamp );
+					?>
+                    <tr>
+                        <td><input name="taskids[]" class="label-inline" type="checkbox" value="<?php echo $data['id']; ?>"></td>
+                        <td><?php echo $data['id'] ?></td>
+                        <td><?php echo $data['task']; ?></td>
+                        <td><?php echo $date; ?></td>
+                        <td><a class="delete" data-taskid="<?php echo $data['id'] ?>" href='#'>Delete</a> | <a
+                                    class="complete" data-taskid="<?php echo $data['id'] ?>" href='#'>Complete</a></td>
+                    </tr>
+					<?php
+				}
+				mysqli_close( $connection );
+				?>
+                </tbody>
+            </table>
+            <select id="action" name="action" >
+                <option value="0">With Selected</option>
+                <option value="bulkdelete">Delete</option>
+                <option value="bulkcomplete">Mark As Complete</option>
+            </select>
+            <input class="button-primary" id="bulksubmit" type="submit" value="Submit">
+        </form>
 		<?php
 	}
 	?>
@@ -187,6 +189,14 @@ $resultCompleteTasks = mysqli_query( $connection, $completeTasksQuery );
                 $("#itaskid").val(id);
                 $("#incompleteform").submit();
             });
+
+            $("#bulksubmit").on("click",function(){
+                if($("#action").val()=='bulkdelete'){
+                    if(!confirm("Are you sure to delete?")){
+                        return false;
+                    }
+                }
+            })
         });
     })(jQuery);
 </script>
