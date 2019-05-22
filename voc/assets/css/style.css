@@ -1,0 +1,95 @@
+body.voc .container{
+    max-width:100%;
+}
+body.home {
+    margin-top: 70px;
+    background-color: #e6e6e6;
+}
+
+body.voc {
+    background-color: #eeeeee;
+}
+
+body.voc #main {
+    padding: 0px 50px 0px 350px;
+}
+
+
+.navigation {
+    margin-top: 100px;
+}
+
+.maintitle {
+    font-weight: 700;
+    text-align: center;
+    color: #E51F59;
+}
+
+body.voc #main {
+    padding-top: 50px;
+}
+
+.formc {
+    background-color: #fff;
+    padding: 20px;
+    box-shadow: 0 10px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19) !important;
+}
+
+.formc h3, .formc h4 {
+    text-align: center;
+}
+
+.formaction {
+    padding: 20px;
+    text-align: center;
+}
+
+.sidebar {
+    z-index:100;
+    width: 300px;
+    height: 100vh;
+    background-color: #ccc;
+    position: fixed;
+
+    padding-top: 100px;
+    padding-left: 40px;
+}
+
+
+.alphabets select {
+    width: 300px;
+}
+
+body.voc .formc {
+    margin-top: 80px;
+
+}
+
+.wordsc {
+    margin-top: 80px;
+    background-color: #fff;
+    padding: 20px;
+    box-shadow: 0 10px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19) !important;
+}
+
+.words {
+    margin-top: 20px;
+}
+
+tr.alt {
+    background-color: #eeeeee;
+}
+
+.words th, .words td {
+    padding-left: 10px;
+}
+
+.wordsc hr {
+    background-color: #cccccc;
+    height: 1px;
+    margin: 0px;
+}
+
+.menu {
+    list-style: none;
+}
