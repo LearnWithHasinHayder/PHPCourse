@@ -5,6 +5,7 @@ include_once "config.php";
 $action     = $_POST['action'] ?? '';
 $status = 0;
 $connection = mysqli_connect( DB_HOST, DB_USER, DB_PASSWORD, DB_NAME );
+mysqli_set_charset($connection, "utf8");
 if ( ! $connection ) {
     throw new Exception( "Cannot connect to database" );
 } else {
@@ -50,5 +51,15 @@ if ( ! $connection ) {
             $status = 2;
         }
         header("Location: index.php?status={$status}");
+    }else if('addword'==$action){
+        $word = $_REQUEST['word']??'';
+        $meaning = $_REQUEST['meaning']??'';
+        $user_id = $_SESSION['id']??0;
+        if($word && $meaning && $user_id){
+            $query = "INSERT INTO words (user_id, word, meaning) VALUES('{$user_id}','{$word}','{$meaning}')";
+//            echo $query;
+            mysqli_query($connection, $query);
+        }
+        header( 'Location: words.php' );
     }
 }

@@ -1,5 +1,6 @@
 <?php
 session_start();
+require_once "functions.php";
 $_user_id = $_SESSION['id']??0;
 if(!$_user_id){
     header('Location: index.php');
@@ -23,8 +24,8 @@ if(!$_user_id){
 <div class="sidebar">
     <h4>Menu</h4>
     <ul class="menu">
-        <li><a href="#">All Words</a></li>
-        <li><a href="#">Add New Word</a></li>
+        <li><a href="#" class="menu-item" data-target="words">All Words</a></li>
+        <li><a href="#" class="menu-item" data-target="wordform">Add New Word</a></li>
         <li><a href="logout.php">Logout</a></li>
     </ul>
 </div>
@@ -33,7 +34,7 @@ if(!$_user_id){
     <h1 class="maintitle">
         <i class="fas fa-language"></i> <br/>My Vocabularies
     </h1>
-    <div class="wordsc">
+    <div class="wordsc helement" id="words">
         <div class="row">
             <div class="column column-75">
                 <div class="alphabets">
@@ -52,7 +53,7 @@ if(!$_user_id){
         </div>
         <hr>
 
-        <table class="words">
+        <table class="words" >
             <thead>
             <tr>
                 <th width="20%">Word</th>
@@ -61,28 +62,32 @@ if(!$_user_id){
             </thead>
             <tbody>
 			<?php
-			for ( $i = 0; $i < 5; $i ++ ) {
-				?>
-                <tr>
-                    <td>Random Word</td>
-                    <td>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi, eligendi</td>
-                </tr>
-				<?php
-			}
+            $words = getWords($_user_id);
+            if(count($words)>0) {
+                $length = count($words);
+                for ( $i = 0; $i < $length; $i ++ ) {
+                    ?>
+                    <tr>
+                        <td><?php echo $words[$i]['word']; ?></td>
+                        <td><?php echo $words[$i]['meaning']; ?></td>
+                    </tr>
+                    <?php
+                }
+            }
 			?>
             </tbody>
         </table>
     </div>
 
-    <div class="formc" style="display: none;">
-        <form>
+    <div class="formc helement" id="wordform" style="display: none;">
+        <form action="tasks.php" method="post">
             <h4>Add New Word</h4>
             <fieldset>
                 <label for="word">Word</label>
-                <input type="text" placeholder="Word" id="word">
+                <input type="text" name="word" placeholder="Word" id="word">
                 <label for="Meaning">Meaning</label>
-                <textarea placeholder="Meaning" id="Meaning" style="height:100px" rows="10"></textarea>
-
+                <textarea name="meaning" placeholder="Meaning" id="Meaning" style="height:100px" rows="10"></textarea>
+                <input type="hidden" name="action" value="addword">
                 <input class="button-primary" type="submit" value="Add Word">
             </fieldset>
         </form>
@@ -90,5 +95,6 @@ if(!$_user_id){
 
 </div>
 </body>
-<script src="assets/js/script.js"></script>
+<script src="//code.jquery.com/jquery-3.4.1.slim.min.js"></script>
+<script src="assets/js/script.js?1"></script>
 </html>
