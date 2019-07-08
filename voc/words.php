@@ -24,7 +24,7 @@ if(!$_user_id){
 <div class="sidebar">
     <h4>Menu</h4>
     <ul class="menu">
-        <li><a href="#" class="menu-item" data-target="words">All Words</a></li>
+        <li><a href="words.php" class="menu-item" data-target="words">All Words</a></li>
         <li><a href="#" class="menu-item" data-target="wordform">Add New Word</a></li>
         <li><a href="logout.php">Logout</a></li>
     </ul>
@@ -36,19 +36,27 @@ if(!$_user_id){
     </h1>
     <div class="wordsc helement" id="words">
         <div class="row">
-            <div class="column column-75">
+            <div class="column column-50">
                 <div class="alphabets">
-                    <select id="ageRangeField">
+                    <select id="alphabets">
                         <option value="all">All Words</option>
                         <option value="A">A#</option>
                         <option value="B">B#</option>
                         <option value="C">C#</option>
+                        <option value="D">D#</option>
+                        <option value="N">N#</option>
+                        <option value="M">M#</option>
                     </select>
 
                 </div>
             </div>
-            <div class="column column-25">
-                <input type="text" placeholder="Search">
+            
+            <div class="column column-50">
+                <form action="" method="POST">
+                    <button class="float-right" name="submit" value="submit">Search</button>
+                    <input type="text" name="search" class="float-right" style="width: 50%; margin-right:20px;" placeholder="Search">
+                </form>
+            </div>
             </div>
         </div>
         <hr>
@@ -62,7 +70,15 @@ if(!$_user_id){
             </thead>
             <tbody>
 			<?php
-            $words = getWords($_user_id);
+
+            if(isset($_POST['submit'])){
+                $serachedText = $_POST['search'];
+	            $words = getWords($_user_id, $serachedText);
+            }else{
+	            $words = getWords($_user_id);
+            }
+
+
             if(count($words)>0) {
                 $length = count($words);
                 for ( $i = 0; $i < $length; $i ++ ) {

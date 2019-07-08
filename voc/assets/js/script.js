@@ -15,5 +15,19 @@
             var target = "#" + $(this).data("target");
             $(target).show();
         });
+
+        $("#alphabets").on('change',function(){
+            var char = $(this).val().toLowerCase();
+
+            if('all'==char){
+                $(".words tr").show();
+                return true;
+            }
+            $(".words tr:gt(0)").hide();
+
+            $(".words td").filter(function(){
+                return $(this).text().indexOf(char)==0;
+            }).parent().show();
+        })
     })
 })(jQuery);
